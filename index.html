@@ -156,39 +156,13 @@
       .hero-grid { grid-template-columns: 1fr; text-align: center; }
       .hero-actions { justify-content: center; }
     }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    .eyebrow .pulse {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 0 var(--accent);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 var(--accent); }
-      70% { box-shadow: 0 0 0 10px rgba(13, 148, 136, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0); }
-    }
     h1.name {
       font-size: clamp(40px, 6vw, 64px);
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.05;
       margin: 0 0 16px;
-      background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--text);
     }
     .role {
       font-size: 20px;
@@ -280,30 +254,6 @@
     }
 
     /* ---------- About ---------- */
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    @media (max-width: 720px) { .about-grid { grid-template-columns: repeat(2, 1fr); } }
-    .stat {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-    }
-    .stat-value {
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: -0.02em;
-    }
-    .stat-label {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
     .about-text {
       font-size: 17px;
       color: var(--muted);
@@ -552,13 +502,11 @@
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <span class="eyebrow"><span class="pulse"></span> Available for new projects</span>
         <h1 class="name">Gökhan Kaya</h1>
         <p class="role"><strong>Senior Software Engineer</strong> · Ankara, Türkiye</p>
         <p class="hero-copy">
-          I build resilient, cloud-native systems — from monolith-to-microservices transitions
-          to defense-grade platforms and real-time urban security infrastructure.
-          12+ years of engineering mission-critical software in the .NET ecosystem.
+          Backend engineer based in Ankara. Currently at Datasoft, working on
+          .NET-based enterprise accounting systems.
         </p>
         <div class="hero-actions">
           <a href="mailto:ttgokhankaya@gmail.com" class="btn btn-primary">
@@ -600,24 +548,6 @@
         exploring how tools such as Claude Code, Codex/OpenAI, GitHub Copilot, and similar systems
         can improve planning, development workflows, and engineering productivity.
       </p>
-      <div class="about-grid reveal">
-        <div class="stat">
-          <div class="stat-value">12+</div>
-          <div class="stat-label">Years in industry</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">60%</div>
-          <div class="stat-label">Performance gain on microservices migration</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">3</div>
-          <div class="stat-label">Domains: security, defense, SaaS</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">MSc</div>
-          <div class="stat-label">Computer Engineering, Gazi Univ.</div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -743,9 +673,9 @@
             <span class="tl-date">Oct 2020 — Aug 2024</span>
           </div>
           <p class="tl-body">
-            Led development and maintenance of the DAM Collector product. Drove the transition
-            from monolithic systems to containerized microservice architectures, integrating
-            Apache Kafka for asynchronous event flow — improving overall performance by ~60%.
+            Worked on the development and maintenance of the DAM Collector product.
+            Contributed to the transition from a monolithic codebase to containerized
+            microservices, and to the integration of Apache Kafka for asynchronous event flow.
           </p>
           <div class="tl-tags">
             <span class="chip">.NET</span>
@@ -818,8 +748,8 @@
   <section id="contact">
     <div class="container">
       <div class="contact-card reveal">
-        <h2>Let's build something together</h2>
-        <p>Have a project in mind, a team to grow, or a hard problem to solve? I'd love to hear about it.</p>
+        <h2>Get in touch</h2>
+        <p>Happy to chat about engineering, coaching, or anything in between.</p>
         <div class="contact-links">
           <a href="mailto:ttgokhankaya@gmail.com" class="btn btn-primary">
             <i class="fa-solid fa-envelope"></i> ttgokhankaya@gmail.com
@@ -839,7 +769,7 @@
 
 <footer class="foot">
   <div class="container foot-inner">
-    <div>© <span id="year"></span> Gökhan Kaya · Made with <i class="fa-solid fa-heart" style="color: var(--accent);"></i> in Ankara</div>
+    <div>© <span id="year"></span> Gökhan Kaya</div>
     <div class="social">
       <a href="https://www.linkedin.com/in/ttgokhankaya/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
       <a href="https://github.com/ttgokhankaya" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
