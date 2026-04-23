@@ -399,6 +399,42 @@
     }
     .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 
+    /* ---------- Coaching ---------- */
+    .coaching-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .coaching-icon {
+      width: 64px; height: 64px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+    .coaching-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.7;
+    }
+    .coaching-text em {
+      color: var(--text);
+      font-style: italic;
+      font-weight: 500;
+    }
+    @media (max-width: 640px) {
+      .coaching-card { grid-template-columns: 1fr; text-align: center; padding: 24px; }
+      .coaching-icon { margin: 0 auto; }
+    }
+
     /* ---------- Education ---------- */
     .edu-grid {
       display: grid;
@@ -498,6 +534,7 @@
     <a href="#top" class="logo"><span class="dot"></span>Gökhan Kaya</a>
     <nav class="nav-links">
       <a href="#about">About</a>
+      <a href="#coaching">Coaching</a>
       <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
@@ -552,11 +589,16 @@
         <span class="tag">// who</span>
       </div>
       <p class="about-text reveal">
-        I'm a software engineer focused on <strong>distributed systems</strong>,
-        <strong>domain-driven design</strong>, and the <strong>.NET</strong> ecosystem.
-        My career has spanned real-time urban security platforms, defense-industry research projects,
-        and modern SaaS products — with a consistent thread of turning complex domains into
-        reliable, observable, and scalable software.
+        I am a Senior Software Engineer focused on <strong>backend development</strong>,
+        <strong>software architecture</strong>, and <strong>scalable enterprise systems</strong>.
+        Since March 2025, I have been working at Datasoft within the accounting team,
+        focusing on integration-heavy backend solutions and business-critical enterprise workflows.
+        My recent work has centered on .NET 8/9, domain-driven design, Clean Architecture,
+        event-driven systems, external service integrations, tenant-aware data structures,
+        observability, and state-driven process design. I am also increasingly focused on
+        <strong>AI-assisted software development</strong> and AI-supported project delivery —
+        exploring how tools such as Claude Code, Codex/OpenAI, GitHub Copilot, and similar systems
+        can improve planning, development workflows, and engineering productivity.
       </p>
       <div class="about-grid reveal">
         <div class="stat">
@@ -575,6 +617,29 @@
           <div class="stat-value">MSc</div>
           <div class="stat-label">Computer Engineering, Gazi Univ.</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coaching -->
+  <section id="coaching">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Var Bir Hayalimiz — Volleyball Coaching &amp; Mentorship</h2>
+        <span class="tag">// beyond code</span>
+      </div>
+      <div class="coaching-card reveal">
+        <div class="coaching-icon">
+          <i class="fa-solid fa-volleyball"></i>
+        </div>
+        <p class="coaching-text">
+          Beyond engineering, volleyball has been one of the strongest shaping forces in my life.
+          Becoming a Level 1 Volleyball Coach allowed me to carry my passion for teamwork, discipline,
+          and development into a new field. For me, coaching is not only about performance — it is about
+          building belief, responsibility, and a shared dream. <em>"Var Bir Hayalimiz"</em> reflects
+          that mindset: strong teams are built not only with skill, but with trust, commitment,
+          and a common vision.
+        </p>
       </div>
     </div>
   </section>
@@ -651,6 +716,27 @@
         <span class="tag">// timeline</span>
       </div>
       <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-head">
+            <h3 class="tl-role">Software Engineer · <span class="tl-company">Datasoft</span></h3>
+            <span class="tl-date">Mar 2025 — Present</span>
+          </div>
+          <p class="tl-body">
+            Working in the accounting team on backend systems that involve enterprise integrations,
+            workflow-driven operations, and domain-focused business processes. My work includes
+            developing and improving .NET 8/9 services, integration flows, tenant-aware data structures,
+            state-based process management, logging/observability, and maintainable architecture
+            patterns aligned with Clean Architecture and domain-driven design principles.
+          </p>
+          <div class="tl-tags">
+            <span class="chip">.NET 8/9</span>
+            <span class="chip">Clean Architecture</span>
+            <span class="chip">DDD</span>
+            <span class="chip">Integrations</span>
+            <span class="chip">Multi-Tenant</span>
+          </div>
+        </div>
+
         <div class="tl-item reveal">
           <div class="tl-head">
             <h3 class="tl-role">Senior Software Engineer · <span class="tl-company">Karmasis</span></h3>
