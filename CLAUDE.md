@@ -2,6 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Workflow rule (always)
+
+No matter what the request is, **always present a plan and get explicit approval before
+making any code changes.** Outline the intended steps first, wait for the user to approve,
+and only then edit files / commit / push. Do not start modifying code without that approval.
+
 ## What this is
 
 A single-page static personal portfolio site for Gökhan Kaya (Senior Software Engineer),
