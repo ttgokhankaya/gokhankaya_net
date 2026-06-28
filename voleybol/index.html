@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Gökhan Kaya'nın voleybol ve antrenörlük hikâyesi.">
+<title>Voleybol & Antrenörlük — Gökhan Kaya</title>
+<link rel="icon" href="../img/gokhanKaya.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root{
+    --ground:#0b1124; --panel:#111a33; --panel-2:#0e1730;
+    --chalk:#eef1f7; --muted:#94a0bd;
+    --line:rgba(238,241,247,.12);
+    --flare:#ff7a33; --flare-soft:rgba(255,122,51,.15);
+    --court:#2dd4bf;
+    --display:'Anton','Arial Narrow Bold',Impact,system-ui,sans-serif;
+    --body:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--ground); color:var(--chalk);
+    font-family:var(--body); line-height:1.7; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--flare); margin:0 0 18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:26px; height:2px; background:var(--flare); display:inline-block;}
+  h1,h2{font-family:var(--display); font-weight:400; text-transform:uppercase; text-wrap:balance; margin:0;}
+
+  /* Top bar */
+  .topbar{
+    position:fixed; top:0; left:0; right:0; z-index:20;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 28px; font-family:var(--mono); font-size:.78rem; letter-spacing:.04em;
+    background:linear-gradient(to bottom, rgba(11,17,36,.82), transparent);
+    backdrop-filter:blur(4px);
+  }
+  .topbar a.back{color:var(--muted); transition:color .2s;}
+  .topbar a.back:hover{color:var(--flare);}
+  .topbar .who{color:var(--chalk); font-weight:500;}
+
+  /* Hero */
+  .hero{
+    position:relative; min-height:100svh; display:flex; align-items:center;
+    padding:120px 0 80px; overflow:hidden;
+  }
+  .hero::before{ /* faint court center line */
+    content:""; position:absolute; left:0; right:0; top:50%; height:1px;
+    background:var(--line);
+  }
+  .hero-bg{position:absolute; inset:0; pointer-events:none;}
+  .glow{
+    position:absolute; width:60vw; height:60vw; max-width:720px; max-height:720px;
+    right:-12vw; top:-16vw; border-radius:50%;
+    background:radial-gradient(circle, var(--flare-soft), transparent 62%);
+  }
+  .hero h1{
+    font-size:clamp(3.4rem,13vw,9.5rem); line-height:.88; letter-spacing:.005em;
+  }
+  .hero h1 .flare{color:var(--flare);}
+  .hero h1 .out{
+    color:transparent; -webkit-text-stroke:2px var(--chalk); text-stroke:2px var(--chalk);
+  }
+  .hero-sub{
+    max-width:46ch; margin:26px 0 0; font-size:1.12rem; color:var(--muted);
+  }
+  .hero-sub strong{color:var(--chalk); font-weight:600;}
+  .scrollcue{
+    margin-top:46px; font-family:var(--mono); font-size:.72rem; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:10px;
+  }
+  .scrollcue .arrow{display:inline-block; animation:bob 1.8s ease-in-out infinite;}
+
+  /* ball + trajectory */
+  .ball-scene{position:absolute; right:4vw; bottom:12vh; width:min(40vw,360px); aspect-ratio:1; pointer-events:none;}
+  .ball-scene svg{width:100%; height:100%; overflow:visible;}
+  .ball{animation:float 5s ease-in-out infinite; transform-origin:center;}
+  .traj{stroke-dasharray:4 9; opacity:.5;}
+
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+  /* Stat strip */
+  .stats{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    display:grid; grid-template-columns:repeat(3,1fr);
+  }
+  .stat{padding:30px 28px; border-left:1px solid var(--line);}
+  .stat:first-child{border-left:none;}
+  .stat .k{font-family:var(--display); font-size:1.5rem; text-transform:uppercase; color:var(--chalk); line-height:1.05;}
+  .stat .v{font-family:var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-top:8px;}
+  @media(max-width:640px){ .stats{grid-template-columns:1fr} .stat{border-left:none; border-top:1px solid var(--line)} .stat:first-child{border-top:none} }
+
+  /* Generic section */
+  section.band{padding:104px 0;}
+  h2.section-title{font-size:clamp(2rem,5.5vw,3.6rem); line-height:.98; margin-bottom:10px;}
+  .lead{font-size:1.18rem; color:var(--muted); max-width:60ch;}
+  .lead strong{color:var(--chalk); font-weight:600;}
+  .story p{font-size:1.12rem; max-width:62ch; color:#c7cee0;}
+  .story p + p{margin-top:20px;}
+
+  /* Values */
+  .values{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:44px;}
+  @media(max-width:780px){ .values{grid-template-columns:1fr} }
+  .card{
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--line); border-radius:16px; padding:28px;
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .card:hover{transform:translateY(-4px); border-color:var(--flare);}
+  .card .num{font-family:var(--mono); font-size:.72rem; letter-spacing:.18em; color:var(--flare);}
+  .card h3{font-family:var(--display); font-weight:400; text-transform:uppercase; font-size:1.5rem; margin:14px 0 10px; letter-spacing:.01em;}
+  .card p{margin:0; color:var(--muted); font-size:.98rem;}
+
+  /* Quote */
+  .quote{position:relative; padding:120px 0;}
+  .quote::before{
+    content:"“"; position:absolute; left:14px; top:30px; font-family:var(--display);
+    font-size:14rem; line-height:1; color:var(--flare-soft);
+  }
+  .quote blockquote{
+    margin:0; position:relative; font-family:var(--display); font-weight:400; text-transform:uppercase;
+    font-size:clamp(1.8rem,4.6vw,3.4rem); line-height:1.06; max-width:18ch; text-wrap:balance;
+  }
+  .quote blockquote .flare{color:var(--flare);}
+  .quote cite{display:block; margin-top:26px; font-family:var(--mono); font-style:normal; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);}
+
+  /* CTA */
+  .cta{
+    border-top:1px solid var(--line);
+    padding:104px 0; text-align:center;
+  }
+  .cta h2{font-size:clamp(2rem,5.5vw,3.4rem); margin-bottom:14px;}
+  .cta p{color:var(--muted); max-width:48ch; margin:0 auto 32px; font-size:1.1rem;}
+  .actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px; padding:14px 24px; border-radius:11px;
+    font-weight:600; font-size:.95rem; border:1px solid transparent; transition:transform .15s, background .2s, border-color .2s, color .2s;
+    font-family:var(--body);
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--flare); color:#1a0f06;}
+  .btn-primary:hover{background:#ff8d50;}
+  .btn-ghost{border-color:var(--line); color:var(--chalk);}
+  .btn-ghost:hover{border-color:var(--flare); color:var(--flare);}
+
+  footer{padding:40px 0; border-top:1px solid var(--line); color:var(--muted); font-family:var(--mono); font-size:.74rem; letter-spacing:.06em;}
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none !important;}
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+  :focus-visible{outline:2px solid var(--flare); outline-offset:3px; border-radius:4px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back" href="../">← gokhankaya.net</a>
+  <span class="who">Gökhan Kaya</span>
+</div>
+
+<header class="hero">
+  <div class="hero-bg"><span class="glow"></span></div>
+  <div class="ball-scene" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none">
+      <path class="traj" d="M6 188 C 40 150, 60 70, 150 36" stroke="#ff7a33" stroke-width="2.5" stroke-linecap="round"/>
+      <g class="ball">
+        <circle cx="150" cy="34" r="30" fill="#eef1f7"/>
+        <path d="M150 4 C 132 26, 130 52, 150 64" stroke="#0b1124" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M122 22 C 146 34, 160 44, 178 40" stroke="#0b1124" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M124 52 C 140 40, 168 34, 176 18" stroke="#0b1124" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow">Antrenör · Takım Arkadaşı</p>
+    <h1>Topun Düşmesine<br><span class="flare">İzin Verme</span></h1>
+    <p class="hero-sub">
+      Gün boyu mühendislik, akşamları file başında. Voleybol beni <strong>ben yapan</strong> oyun;
+      sahada öğrendiklerimi artık <strong>antrenör</strong> olarak paylaşıyorum.
+    </p>
+    <div class="scrollcue"><span class="arrow">↓</span> aşağı kaydır</div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="k">Ortaokuldan beri</div><div class="v">sahada</div></div>
+  <div class="stat"><div class="k">Lisede</div><div class="v">takım kaptanı</div></div>
+  <div class="stat"><div class="k">Level 1</div><div class="v">voleybol antrenörü</div></div>
+</div>
+
+<section class="band story">
+  <div class="wrap">
+    <p class="eyebrow reveal">// saha</p>
+    <h2 class="section-title reveal">Hikâye</h2>
+    <div class="reveal">
+      <p>
+        Voleybol, hayatımda en güçlü iz bırakan şeylerden biri. Ortaokulda başladı; lisede
+        takım kaptanlığı yaptım ve turnuvalarda oynadım, üniversitede de sahayı bırakmadım.
+        Bugün hâlâ rekreasyonel olarak oynuyor, profesyonel maçları yakından takip ediyorum.
+      </p>
+      <p>
+        Level 1 Antrenörlük belgesini almak, bu tutkuyu yeni bir alana taşımamı sağladı:
+        takım ruhunu, disiplini ve gelişimi başkalarına aktarmak. Benim için antrenörlük
+        bir sonuç değil, birlikte yürünen bir yol.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow reveal">// inanç</p>
+    <h2 class="section-title reveal">Antrenörlük Felsefem</h2>
+    <p class="lead reveal">
+      Benim için antrenörlük yalnızca performans değil — <strong>inanç, sorumluluk ve
+      ortak bir hayal</strong> inşa etmek.
+    </p>
+    <div class="values">
+      <div class="card reveal">
+        <div class="num">01</div>
+        <h3>Takım Ruhu</h3>
+        <p>Sahaya çıkan tek tek oyuncular değil, ortak bir hedefe inanan bir gruptur. Önce "biz" oluruz.</p>
+      </div>
+      <div class="card reveal">
+        <div class="num">02</div>
+        <h3>Disiplin</h3>
+        <p>İstikrar, her gün tekrarlanan küçük doğru alışkanlıklardan gelir. Antrenman sahada, karakter dışarıda biter.</p>
+      </div>
+      <div class="card reveal">
+        <div class="num">03</div>
+        <h3>Gelişim</h3>
+        <p>Herkesin bir sonraki adımı vardır. İşim, o adımı görmek ve birlikte oraya yürümek.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap reveal">
+    <blockquote>İyi takım, en sert smacı değil; topu yerden kurtaran <span class="flare">o son hamleyi</span> paylaşır.</blockquote>
+    <cite>— saha notları</cite>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap reveal">
+    <p class="eyebrow" style="justify-content:center;">// birlikte</p>
+    <h2>Aynı hayali mi paylaşıyoruz?</h2>
+    <p>Takımın, kulübün ya da sadece güzel bir sohbet için — kapım açık.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="mailto:me@gokhankaya.net">Bana yaz</a>
+      <a class="btn btn-ghost" href="../">← Ana sayfaya dön</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="y"></span> Gökhan Kaya</span>
+    <span>🏐 Saha dışında</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
