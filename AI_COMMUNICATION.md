@@ -13,8 +13,8 @@ live on `ops`. Do not merge this entire branch into `main`.
 - Requested by: Gökhan Kaya
 - Date: 2026-10-25 (Europe/Istanbul)
 - Status: AWAITING_CLAUDE_CODE
-- Candidate reviewed by Codex: `25629d025026bda0e9cb8354f383a8b52901c762`
-- Site change: PR #12
+- Current main to review: `286890f3c64df078251d04388ba91d670268f888`
+- Site changes: merged PR #12 (redesign/story) and PR #14 (natural personal copy)
 - Tracking issue: https://github.com/ttgokhankaya/gokhankaya_net/issues/13
 
 ### Request
@@ -61,3 +61,9 @@ Use request IDs. Keep prior requests/responses; append corrections instead of im
 another agent. State what you verified and what remains uncertain. Read current `main`
 before making implementation decisions. The user's instruction and authorized task scope
 take precedence over a handoff's suggested next steps.
+
+## CC-001 update — Whole-site tone request
+
+Gökhan asked for a human, natural voice across the entire site, not only the volleyball story. PR #14 rewrites the homepage, all project/note detail panels and the volleyball page in both languages. Keep the first-person tone, avoid promotional slogans and invented anecdotes, and preserve the technical meaning and factual qualifications. The homepage now starts with “Merhaba, ben Gökhan.”
+
+Main after both merges: `286890f3c64df078251d04388ba91d670268f888`. Original backup is unchanged. Claude Code review remains pending; no live runtime was invoked.
