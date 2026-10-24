@@ -1,56 +1,76 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file guides Claude Code and other coding agents working in this repository.
 
 ## Workflow rule (always)
 
 No matter what the request is, **always present a plan and get explicit approval before
 making any code changes.** Outline the intended steps first, wait for the user to approve,
 and only then edit files / commit / push. Do not start modifying code without that approval.
+Existing explicit user authorization for the current task applies; do not ask for the same
+authorization again.
 
-## What this is
+## Project
 
-A single-page static personal portfolio site for Gökhan Kaya (Senior Software Engineer),
-deployed via **GitHub Pages** at the custom domain **gokhankaya.net**. There is no build
-step, no package manager, no test suite, and no framework — it is plain HTML/CSS/JS.
+Gökhan Kaya's personal portfolio, **Kod × Saha**, connects software engineering,
+AI-assisted development and volleyball. GitHub Pages publishes `main` at
+`https://gokhankaya.net`. The separate Sites-hosted edition has its own origin and
+owner-private access. A GitHub Pages merge does not update Sites automatically.
 
-## Architecture
+## Structure
 
-- **`index.html`** — the entire site. All CSS lives in a single `<style>` block in the
-  `<head>` and all JS in a single `<script>` block before `</body>`. There are no separate
-  `.css` or `.js` files; edit this one file for any content, styling, or behavior change.
-- **`img/`** — avatar/profile images referenced with relative paths (e.g. `./img/gokhanKaya.png`).
-- **`CNAME`** — contains `gokhankaya.net`; tells GitHub Pages the custom domain.
-- External dependencies are all CDN-loaded (no local copies): Google Fonts (Inter, JetBrains
-  Mono), Font Awesome 6.5.2, and Google Analytics (gtag, ID `G-1H7JFTG0WS`).
+- `index.html`: complete homepage, with inline CSS and JavaScript.
+- `voleybol/index.html`: bilingual volleyball story, with inline CSS and JavaScript.
+- `img/`: existing profile assets.
+- `cv/Gokhan-Kaya-CV.pdf`: existing CV; do not regenerate it as part of a design edit.
+- `CNAME`: `gokhankaya.net`; keep it on the published branch.
+- No framework, package manager, build step or test suite is required.
+- Fonts are CDN-loaded DM Sans and DM Mono, with local system fallbacks.
 
-### Key conventions inside `index.html`
-- **Theming** is driven by CSS custom properties on `:root` (light) and `[data-theme="dark"]`.
-  The toggle persists choice to `localStorage` under key `theme` and falls back to
-  `prefers-color-scheme`. To add a color, add the variable to *both* `:root` and the dark block.
-- **Sections** follow a repeated pattern: `<section id="...">` → `.container` → `.section-head`
-  (with an `h2` and a `.tag` "// label") → content. The sticky nav links to these `id`s.
-- **Scroll reveal**: elements with class `reveal` are animated in by an `IntersectionObserver`;
-  add `reveal` to new elements you want to fade in.
-- Content (experience timeline, skills chips, education) is hand-written HTML — update the
-  markup directly; there is no data file or templating.
+## UI and content conventions
 
-## Local development
+- Warm off-white, navy and orange; large editorial typography and responsive layouts.
+- CSS variables on `:root` and `[data-theme="dark"]`; update both themes for new colors.
+- Theme preference: `gk-theme`; language preference: `gk-lang`.
+- Static Turkish content is present in the HTML. `data-en` carries the English version.
+  Both pages share the preferences, so navigation should preserve them.
+- Homepage projects and notes open native `<dialog>` elements with keyboard dismissal.
+- Volleyball page includes a player/coach perspective switch. Its court is illustrative.
+- Keep factual claims grounded. Do not invent clubs, awards, results, testimonials,
+  qualifications or launched capabilities.
+- SportPlatform is in development; VolleyReplay is at MVP design stage.
+  Replay latency is a hypothesis, not a measured result.
 
-No tooling required. Open `index.html` directly in a browser, or serve the folder:
+## AI communication and operations branches
 
-```bash
-python3 -m http.server 8000   # then visit http://localhost:8000
-```
+The user requested these long-lived branches:
 
-## Deployment & custom domain (important)
+- `ai-communication`: agent handoffs, review requests, decisions and responses.
+- `ops`: deployment records, backup references and rollback instructions.
+- `backup/pre-kod-saha-2026-10-25`: preserved pre-redesign snapshot.
+  Do not commit new work to or repoint the backup branch.
 
-- The site is published by **GitHub Pages from the `main` branch**. Changes only go live
-  after they land on `main`. Feature branches (e.g. `claude/*`) do not affect the live site
-  until merged.
-- The `CNAME` file must exist on the **published branch (`main`)** for the custom domain to work.
-- For `gokhankaya.net` to resolve, DNS at the domain registrar must point to GitHub Pages —
-  apex `A` records to `185.199.108.153` / `185.199.109.153` / `185.199.110.153` /
-  `185.199.111.153`, and `www` as a `CNAME` to `ttgokhankaya.github.io`. The custom domain must
-  also be set under repo **Settings → Pages**. Pointing DNS elsewhere (e.g. a registrar parking
-  IP) is the usual cause of the domain "not working" even when the repo is correct.
+Before resuming work, fetch those branches and inspect:
+`git show origin/ai-communication:AI_COMMUNICATION.md` and
+`git show origin/ops:RUNBOOK.md`.
+
+Respond to review requests on `ai-communication` with your actual identity, reviewed
+commit SHA, findings and verification evidence. A handoff file does not launch another
+agent automatically and does not prove that a review happened. Never attribute a response
+to another agent without receiving it. Put implementation changes on a feature branch and
+open a PR to `main`; do not merge the whole communication or operations branch into production.
+
+## Preview and validation
+
+Run `python3 -m http.server 8000` in a local checkout and open
+`http://localhost:8000`. Check both pages at desktop and mobile widths, Turkish/English,
+light/dark themes, keyboard navigation, dialogs, perspective switch, CV and local links.
+Use JavaScript syntax and internal-reference checks when editing scripts or navigation.
+
+## Publishing and rollback
+
+GitHub Pages serves `main`; a branch alone is not a production deployment.
+Preserve `CNAME`, CV and existing assets. Confirm the Pages deployment and both pages
+after release. For a rollback, use a new branch and restore the changed files from the
+documented backup, then deploy through a PR. Do not rewrite `main` history.
+The detailed procedure and release evidence live on `ops`.

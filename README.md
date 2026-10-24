@@ -1,33 +1,42 @@
-# 👋 Hello developer!
-This is one of the many templates available from W3schools. Check our [tutorials for frontend development](https://www.w3schools.com/where_to_start.asp) to learn the basics of [HTML](https://www.w3schools.com/html/default.asp) and [CSS](https://www.w3schools.com/css/default.asp). 🦄
+# Gökhan Kaya — Kod × Saha
 
+Personal portfolio at **https://gokhankaya.net**, connecting software engineering, AI-assisted development and volleyball.
 
-## 🏗 What's next?
-Customize this template to make it your own. Remember to make your layout responsive - if you want your site to look good on smaller screens like mobile. 
+## Contents
 
-## 🎨 Where to find everything
+- Professional introduction, existing profile photo and downloadable CV
+- SportPlatform and VolleyReplay project concepts with detailed background
+- Engineering notes on agent behavior contracts, regression replay and courtside product design
+- Career, education, volleyball story and contact links
+- Turkish/English language switch, light/dark theme and responsive navigation
 
-- **External style sheet:** The template you chose is built with [W3CSS](https://www.w3schools.com/w3css/default.asp), placed in an external style sheet. You can either replace that style sheet - or keep it simple and leave it in.  
-	[Go to tutorial about W3CSS](https://www.w3schools.com/w3css/default.asp)
+Project visuals are conceptual illustrations. VolleyReplay is described as an MVP design; its latency target is an unverified hypothesis.
 
-- **Fonts:** Explore the options from **Google fonts** and add your favorite.  
-	[Go to tutorial about fonts](https://www.w3schools.com/w3css/w3css_fonts_google.asp)
+## Structure
 
-- **Icons:** Icons are from **Fontawesome**. You can reuse those and choose other free icons from their free library.  
-	[Go to tutorial about Fontawesome](https://www.w3schools.com/icons/fontawesome5_intro.asp)
+- `index.html`: complete main page with inline CSS and JavaScript; no build step or dependencies to install
+- `img/gokhanKaya.jpeg`: existing profile photo
+- `cv/Gokhan-Kaya-CV.pdf`: existing CV
+- `voleybol/index.html`: redesigned Turkish/English volleyball story with shared theme/language preferences and an interactive player/coach perspective
+- `CNAME`: GitHub Pages custom domain
 
-- **Images:** Replace the images by uploading your own and updating their URLs.  
-	[Go to article about how to upload files](https://support.w3schools.com/hc/en-gb/articles/4410414928017)
+## Preview
 
-> ⚡️ **Tip:** [Set up Google Analytics](https://www.w3schools.com/howto/howto_google_analytics.asp) to get valuable insights about your space and visitors. 
+Run `python3 -m http.server 8000` from the repository root and open `http://localhost:8000`.
 
+## Publishing
 
-### ⛑ Need support?
-[Join our Discord community](https://discord.gg/6Z7UaRbUQM) and ask questions in the **#spaces-general** channel.
+GitHub Pages publishes the `main` branch to `gokhankaya.net`. Changes in a feature branch become live on that domain after merge. Keep `CNAME` on the published branch. The separate Sites-hosted edition uses its own origin for canonical and Open Graph URLs.
 
+## Validation
 
-### 🚀 Upgrade to Pro
-[Upgrade your account](https://billing.w3schools.com/products/spaces) to boost your space and take your projects to the next level; more requests, more storage and more power for up to 10 spaces.
+The redesign was checked in a desktop browser and a 390px mobile-width frame, including language/theme switching, mobile menu, project/note dialogs, Escape dismissal, internal references and JavaScript syntax. Theme and language preferences are stored only in the browser. Contact links open the visitor's mail client; no form backend is required.
 
+## Branches and backup
 
-Happy learning!
+- `main`: GitHub Pages production source
+- `ai-communication`: Codex / Claude Code review requests and responses
+- `ops`: publishing, release evidence and rollback runbook
+- `backup/pre-kod-saha-2026-10-25`: complete pre-redesign source snapshot at `d6f3047032227200ec156d34c1ce65c7c6434abc`
+
+Read `CLAUDE.md` for working conventions and how to inspect the handoff branches. Communication files are an asynchronous handoff, not an automatic Claude Code integration.
