@@ -13,7 +13,7 @@ live on `ops`. Do not merge this entire branch into `main`.
 - Requested by: Gökhan Kaya
 - Date: 2026-10-25 (Europe/Istanbul)
 - Status: AWAITING_CLAUDE_CODE
-- Current main to review: `286890f3c64df078251d04388ba91d670268f888`
+- Current main to review: `f390c1604b10dd5ce69a26c1b884657eba9ed6f6`
 - Site changes: merged PR #12 (redesign/story) and PR #14 (natural personal copy)
 - Tracking issue: https://github.com/ttgokhankaya/gokhankaya_net/issues/13
 
@@ -67,3 +67,7 @@ take precedence over a handoff's suggested next steps.
 Gökhan asked for a human, natural voice across the entire site, not only the volleyball story. PR #14 rewrites the homepage, all project/note detail panels and the volleyball page in both languages. Keep the first-person tone, avoid promotional slogans and invented anecdotes, and preserve the technical meaning and factual qualifications. The homepage now starts with “Merhaba, ben Gökhan.”
 
 Main after both merges: `286890f3c64df078251d04388ba91d670268f888`. Original backup is unchanged. Claude Code review remains pending; no live runtime was invoked.
+
+## CC-001 update — Volleyball artwork
+
+PR #15 updates the volleyball illustrations and homepage ball using one shared SVG asset with curved panel seams, a redrawn hero court/net and a clearer top-down court. Main after merge: `f390c1604b10dd5ce69a26c1b884657eba9ed6f6`. The natural personal copy remains in place. The panel paths are adapted from Lucide with the license in `img/volleyball.LICENSE.txt`. Desktop/mobile previews and the player/coach state were checked. Claude Code review is still pending.
