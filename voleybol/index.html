@@ -1,289 +1,44 @@
-<!DOCTYPE html>
-<html lang="tr">
+<!doctype html>
+<html lang="tr" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Gökhan Kaya'nın voleybol ve antrenörlük hikâyesi.">
-<title>Voleybol & Antrenörlük — Gökhan Kaya</title>
-<link rel="icon" href="../img/gokhanKaya.jpeg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Voleybol Hikâyem — Gökhan Kaya</title>
+<meta name="description" content="Ortaokulda başlayan bir oyun, takım kaptanlığı ve antrenörlüğe uzanan bir hikâye. Gökhan Kaya’nın voleybol dünyası.">
+<meta name="theme-color" content="#f6f5f0">
+<meta property="og:title" content="Bir oyundan fazlası. — Gökhan Kaya"><meta property="og:description" content="Oyuncu, takım arkadaşı, antrenör. Voleybol hikâyem ve sahadan doğan fikirler."><meta property="og:type" content="website"><meta property="og:url" content="https://gokhankaya.net/voleybol/">
+<link rel="canonical" href="https://gokhankaya.net/voleybol/">
+<link rel="icon" href="../img/gokhanKaya.jpeg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;550;600;650;700;750&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('gk-theme')||'light'}catch(e){}</script>
 <style>
-  :root{
-    --ground:#0b1124; --panel:#111a33; --panel-2:#0e1730;
-    --chalk:#eef1f7; --muted:#94a0bd;
-    --line:rgba(238,241,247,.12);
-    --flare:#ff7a33; --flare-soft:rgba(255,122,51,.15);
-    --court:#2dd4bf;
-    --display:'Anton','Arial Narrow Bold',Impact,system-ui,sans-serif;
-    --body:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,monospace;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0; background:var(--ground); color:var(--chalk);
-    font-family:var(--body); line-height:1.7; -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit; text-decoration:none;}
-  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
-  .eyebrow{
-    font-family:var(--mono); font-size:.72rem; letter-spacing:.28em; text-transform:uppercase;
-    color:var(--flare); margin:0 0 18px; display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{content:""; width:26px; height:2px; background:var(--flare); display:inline-block;}
-  h1,h2{font-family:var(--display); font-weight:400; text-transform:uppercase; text-wrap:balance; margin:0;}
-
-  /* Top bar */
-  .topbar{
-    position:fixed; top:0; left:0; right:0; z-index:20;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:16px 28px; font-family:var(--mono); font-size:.78rem; letter-spacing:.04em;
-    background:linear-gradient(to bottom, rgba(11,17,36,.82), transparent);
-    backdrop-filter:blur(4px);
-  }
-  .topbar a.back{color:var(--muted); transition:color .2s;}
-  .topbar a.back:hover{color:var(--flare);}
-  .topbar .who{color:var(--chalk); font-weight:500;}
-
-  /* Hero */
-  .hero{
-    position:relative; min-height:100svh; display:flex; align-items:center;
-    padding:120px 0 80px; overflow:hidden;
-  }
-  .hero::before{ /* faint court center line */
-    content:""; position:absolute; left:0; right:0; top:50%; height:1px;
-    background:var(--line);
-  }
-  .hero-bg{position:absolute; inset:0; pointer-events:none;}
-  .glow{
-    position:absolute; width:60vw; height:60vw; max-width:720px; max-height:720px;
-    right:-12vw; top:-16vw; border-radius:50%;
-    background:radial-gradient(circle, var(--flare-soft), transparent 62%);
-  }
-  .hero h1{
-    font-size:clamp(3.4rem,13vw,9.5rem); line-height:.88; letter-spacing:.005em;
-  }
-  .hero h1 .flare{color:var(--flare);}
-  .hero h1 .out{
-    color:transparent; -webkit-text-stroke:2px var(--chalk); text-stroke:2px var(--chalk);
-  }
-  .hero-sub{
-    max-width:46ch; margin:26px 0 0; font-size:1.12rem; color:var(--muted);
-  }
-  .hero-sub strong{color:var(--chalk); font-weight:600;}
-  .scrollcue{
-    margin-top:46px; font-family:var(--mono); font-size:.72rem; letter-spacing:.22em;
-    text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:10px;
-  }
-  .scrollcue .arrow{display:inline-block; animation:bob 1.8s ease-in-out infinite;}
-
-  /* ball + trajectory */
-  .ball-scene{position:absolute; right:4vw; bottom:12vh; width:min(40vw,360px); aspect-ratio:1; pointer-events:none;}
-  .ball-scene svg{width:100%; height:100%; overflow:visible;}
-  .ball{animation:float 5s ease-in-out infinite; transform-origin:center;}
-  .traj{stroke-dasharray:4 9; opacity:.5;}
-
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
-
-  /* Stat strip */
-  .stats{
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    display:grid; grid-template-columns:repeat(3,1fr);
-  }
-  .stat{padding:30px 28px; border-left:1px solid var(--line);}
-  .stat:first-child{border-left:none;}
-  .stat .k{font-family:var(--display); font-size:1.5rem; text-transform:uppercase; color:var(--chalk); line-height:1.05;}
-  .stat .v{font-family:var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-top:8px;}
-  @media(max-width:640px){ .stats{grid-template-columns:1fr} .stat{border-left:none; border-top:1px solid var(--line)} .stat:first-child{border-top:none} }
-
-  /* Generic section */
-  section.band{padding:104px 0;}
-  h2.section-title{font-size:clamp(2rem,5.5vw,3.6rem); line-height:.98; margin-bottom:10px;}
-  .lead{font-size:1.18rem; color:var(--muted); max-width:60ch;}
-  .lead strong{color:var(--chalk); font-weight:600;}
-  .story p{font-size:1.12rem; max-width:62ch; color:#c7cee0;}
-  .story p + p{margin-top:20px;}
-
-  /* Values */
-  .values{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:44px;}
-  @media(max-width:780px){ .values{grid-template-columns:1fr} }
-  .card{
-    background:linear-gradient(180deg,var(--panel),var(--panel-2));
-    border:1px solid var(--line); border-radius:16px; padding:28px;
-    transition:transform .25s ease, border-color .25s ease;
-  }
-  .card:hover{transform:translateY(-4px); border-color:var(--flare);}
-  .card .num{font-family:var(--mono); font-size:.72rem; letter-spacing:.18em; color:var(--flare);}
-  .card h3{font-family:var(--display); font-weight:400; text-transform:uppercase; font-size:1.5rem; margin:14px 0 10px; letter-spacing:.01em;}
-  .card p{margin:0; color:var(--muted); font-size:.98rem;}
-
-  /* Quote */
-  .quote{position:relative; padding:120px 0;}
-  .quote::before{
-    content:"“"; position:absolute; left:14px; top:30px; font-family:var(--display);
-    font-size:14rem; line-height:1; color:var(--flare-soft);
-  }
-  .quote blockquote{
-    margin:0; position:relative; font-family:var(--display); font-weight:400; text-transform:uppercase;
-    font-size:clamp(1.8rem,4.6vw,3.4rem); line-height:1.06; max-width:18ch; text-wrap:balance;
-  }
-  .quote blockquote .flare{color:var(--flare);}
-  .quote cite{display:block; margin-top:26px; font-family:var(--mono); font-style:normal; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);}
-
-  /* CTA */
-  .cta{
-    border-top:1px solid var(--line);
-    padding:104px 0; text-align:center;
-  }
-  .cta h2{font-size:clamp(2rem,5.5vw,3.4rem); margin-bottom:14px;}
-  .cta p{color:var(--muted); max-width:48ch; margin:0 auto 32px; font-size:1.1rem;}
-  .actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
-  .btn{
-    display:inline-flex; align-items:center; gap:9px; padding:14px 24px; border-radius:11px;
-    font-weight:600; font-size:.95rem; border:1px solid transparent; transition:transform .15s, background .2s, border-color .2s, color .2s;
-    font-family:var(--body);
-  }
-  .btn:active{transform:translateY(1px);}
-  .btn-primary{background:var(--flare); color:#1a0f06;}
-  .btn-primary:hover{background:#ff8d50;}
-  .btn-ghost{border-color:var(--line); color:var(--chalk);}
-  .btn-ghost:hover{border-color:var(--flare); color:var(--flare);}
-
-  footer{padding:40px 0; border-top:1px solid var(--line); color:var(--muted); font-family:var(--mono); font-size:.74rem; letter-spacing:.06em;}
-  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
-
-  /* reveal */
-  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
-  .reveal.in{opacity:1; transform:none;}
-  @media(prefers-reduced-motion:reduce){
-    *{animation:none !important;}
-    .reveal{opacity:1; transform:none; transition:none;}
-    html{scroll-behavior:auto;}
-  }
-  :focus-visible{outline:2px solid var(--flare); outline-offset:3px; border-radius:4px;}
+:root{--bg:#f6f5f0;--paper:#fffefb;--text:#182334;--muted:#646a70;--line:#d9dcd5;--accent:#be4226;--orange:#f47c53;--soft:#eaece6;--navy:#152233;--body:'DM Sans',Arial,sans-serif;--mono:'DM Mono',monospace}
+[data-theme=dark]{--bg:#111b27;--paper:#192535;--text:#eff0e9;--muted:#a7b0b9;--line:#34404c;--accent:#ff946c;--soft:#202d3b;--navy:#0b1521}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased}button{font:inherit;color:inherit;cursor:pointer}a{color:inherit;text-decoration:none}button{border:0}h1,h2,h3,p,figure{margin:0}h1,h2,h3{font-weight:550;letter-spacing:-.045em;line-height:1.1}svg{display:block}::selection{background:#f4a385;color:#152233}:focus-visible{outline:3px solid var(--accent);outline-offset:5px}.wrap{width:min(1240px,calc(100% - 112px));margin-inline:auto}.mono{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase}.muted{color:var(--muted)}.accent{color:var(--accent)}.label{display:flex;align-items:center;gap:14px;color:var(--muted)}.label:before{content:'';width:24px;height:1px;background:var(--accent)}.skip{position:fixed;top:-70px;left:20px;background:var(--text);color:var(--bg);padding:10px;z-index:100}.skip:focus{top:10px}.text-link{display:inline-flex;align-items:center;gap:24px;border-bottom:1px solid currentColor;padding-bottom:7px;font-size:13px;font-weight:600}.text-link:hover .arrow{transform:translate(3px,-3px)}.arrow{display:inline-block;font-family:Arial,sans-serif;font-size:21px;transition:transform .2s}.button{background:var(--navy);color:#f6f5f0;display:inline-flex;align-items:center;gap:30px;border:1px solid var(--navy);padding:13px 20px;border-radius:4px;font-size:13px}.button:hover{background:#2b3d51}
+header{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}.header-inner{height:92px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:14px}.monogram{width:40px;height:40px;border:1px solid var(--text);display:grid;place-items:center;font-size:17px;font-weight:700;letter-spacing:-2px}.brand b{font-size:15px;display:block;line-height:1.5}.brand small{font-size:10px;display:block;color:var(--muted);letter-spacing:.06em}.nav{display:flex;gap:28px;font-size:12px;color:var(--muted)}.nav a:hover{color:var(--accent)}.tools{display:flex;align-items:center;gap:18px}.home{font-size:12px;border-bottom:1px solid var(--text)}.lang{background:none;border-bottom:1px solid var(--line);padding:6px 0;font-family:var(--mono);font-size:11px}.theme{width:30px;height:30px;background:none;display:grid;place-items:center;font-size:20px}
+.hero{padding:64px 0 55px}.hero-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;gap:20px}.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:65px;align-items:center}.hero h1{font-size:clamp(65px,7.5vw,104px);letter-spacing:-.065em;line-height:1.03}.hero h1 span{display:block}.hero-copy>p{max-width:445px;font-size:17px;color:var(--muted);line-height:1.85;margin-top:28px}.hero-copy .text-link{margin-top:28px}.court-art{position:relative;aspect-ratio:1.05;background:var(--navy);border-radius:4px;overflow:hidden;display:grid;place-items:center;color:#eeeede}.court-art>svg{width:95%;height:95%}.art-label{position:absolute;top:22px;left:24px;right:24px;display:flex;justify-content:space-between;font-size:9px;color:#b9c2cb}.art-caption{position:absolute;bottom:20px;left:24px;right:24px;display:flex;justify-content:space-between;gap:20px;font-size:9px;color:#b9c2cb}.timeline-strip{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line);margin-top:56px}.milestone{padding:24px 26px;border-left:1px solid var(--line)}.milestone:first-child{border:0;padding-left:0}.milestone b{display:block;font-size:20px;font-weight:550;letter-spacing:-.035em;line-height:1.3}.milestone span{display:block;color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:.05em;margin-top:7px;text-transform:uppercase}
+.story{padding:65px 0 90px}.story-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:110px;margin-top:30px}.section-title{font-size:clamp(37px,4.8vw,62px);line-height:1.15}.story-intro{font-size:17px;color:var(--muted);margin-top:25px;max-width:380px}.chapters{border-top:1px solid var(--line)}.chapter{display:grid;grid-template-columns:37px 1fr;gap:22px;padding:25px 0;border-bottom:1px solid var(--line)}.chapter .num{font-family:var(--mono);font-size:10px;color:var(--accent);padding-top:3px}.chapter h3{font-size:23px;letter-spacing:-.03em}.chapter p{font-size:14px;color:var(--muted);line-height:1.9;margin-top:12px}.chapter .chapter-label{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.05em;color:var(--muted);margin-bottom:9px;text-transform:uppercase}
+.philosophy{background:var(--navy);color:#f6f5f0;padding:75px 0}.philosophy .label{color:#adbac6}.philosophy .label:before{background:#f59672}.philosophy-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;margin-top:34px}.philosophy h2{font-size:clamp(39px,4.7vw,63px);line-height:1.15}.philosophy h2 span{color:#f59672}.philosophy-intro{font-size:14px;color:#b7c0cb;line-height:1.9;margin-top:24px;max-width:390px}.value{padding:21px 0;border-bottom:1px solid #ffffff26;display:grid;grid-template-columns:30px 1fr;gap:15px}.value:first-child{padding-top:0}.value .num{font-family:var(--mono);font-size:10px;color:#f59672}.value h3{font-size:20px;letter-spacing:-.025em}.value p{font-size:13px;color:#b7c0cb;margin-top:10px;line-height:1.9}.quote{font-size:clamp(24px,3.2vw,40px);line-height:1.4;letter-spacing:-.035em;border-top:1px solid #ffffff26;padding-top:36px;margin-top:47px;max-width:1000px}.quote span{color:#f59672}
+.perspective{padding:90px 0}.perspective-head{display:flex;align-items:end;justify-content:space-between;gap:50px;margin:26px 0 38px}.perspective-head>p{font-size:14px;color:var(--muted);max-width:350px;line-height:1.8}.perspective-grid{display:grid;grid-template-columns:1.1fr .9fr;border:1px solid var(--line);border-radius:4px;overflow:hidden}.court-board{background:#e1e7df;min-height:345px;display:grid;place-items:center;position:relative;padding:45px}.court-board svg{width:100%;max-width:440px}.court-board .board-label{position:absolute;bottom:16px;left:22px;color:#516553;font-size:8px}.view-copy{background:var(--paper);padding:37px 38px;display:flex;flex-direction:column;justify-content:center}.view-switch{display:flex;gap:7px;margin-bottom:28px}.view-switch button{border:1px solid var(--line);background:none;color:var(--muted);border-radius:99px;padding:7px 15px;font-size:11px}.view-switch button[aria-pressed=true]{background:var(--text);color:var(--bg);border-color:var(--text)}.view-copy h3{font-size:29px;line-height:1.2}.view-copy p{font-size:14px;color:var(--muted);line-height:1.9;margin-top:18px}.view-copy .view-note{font-family:var(--mono);font-size:9px;color:var(--accent);margin-top:24px;letter-spacing:.04em;text-transform:uppercase}.pass-line{transition:opacity .3s}.coach-view .pass-line{opacity:.25}.coach-mark{opacity:0;transition:opacity .3s}.coach-view .coach-mark{opacity:1}
+.intersection{padding:0 0 90px}.intersection-inner{border-top:1px solid var(--line);padding-top:45px;display:grid;grid-template-columns:.9fr 1.1fr;gap:110px}.intersection h2{font-size:41px;line-height:1.15;margin-top:24px}.intersection p{font-size:14px;color:var(--muted);line-height:1.9}.intersection .text-link{margin-top:23px}.project-lines{border-top:1px solid var(--line);margin-top:26px}.project-line{padding:18px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:120px 1fr;gap:20px;font-size:12px}.project-line b{font-weight:600}.project-line span{color:var(--muted)}
+.contact{padding:59px 0;background:#e5e8de;color:#182334}.contact-inner{display:flex;align-items:center;justify-content:space-between;gap:40px}.contact .mono{color:#62685e;margin-bottom:20px}.contact h2{font-size:clamp(35px,4.5vw,59px);line-height:1.15}.contact p{font-size:14px;color:#5a635d;margin-top:18px;max-width:500px}.contact-actions{display:flex;align-items:center;gap:25px;margin-top:28px}.contact .button{background:#182b36;color:#fff}.contact .text-link{font-size:12px}footer{padding:26px 0}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:10px;color:var(--muted)}.footer-motto{font-family:var(--mono);font-size:9px}
+@media(max-width:1000px){.wrap{width:calc(100% - 72px)}.hero-grid{gap:40px}.nav{gap:17px}.hero h1{font-size:clamp(56px,8vw,80px)}.story-grid,.intersection-inner{gap:60px}.philosophy-grid{gap:60px}.court-board{padding:35px}.view-copy{padding:28px}.view-copy h3{font-size:26px}.hero-copy>p{font-size:15px}}
+@media(max-width:760px){.wrap{width:calc(100% - 44px)}.header-inner{height:75px;gap:20px}.nav{display:none}.tools{gap:14px}.hero{padding-top:36px}.hero-top{margin-bottom:31px}.hero-top .mono{font-size:9px}.hero-grid{gap:30px}.hero h1{font-size:clamp(44px,7.5vw,60px)}.hero-copy>p{font-size:13px;margin-top:22px}.hero-copy .text-link{font-size:12px;margin-top:24px}.art-label,.art-caption{font-size:7px;left:15px;right:15px}.timeline-strip{margin-top:38px}.milestone{padding:20px}.milestone b{font-size:17px}.milestone span{font-size:8px}.story{padding:50px 0 65px}.story-grid{gap:45px}.section-title{font-size:38px}.story-intro{font-size:14px}.chapter{gap:10px;grid-template-columns:27px 1fr}.chapter h3{font-size:20px}.chapter p{font-size:12px}.philosophy{padding:55px 0}.philosophy-grid{gap:45px}.philosophy h2{font-size:40px}.philosophy-intro{font-size:13px}.value{gap:8px;grid-template-columns:25px 1fr}.value h3{font-size:18px}.value p{font-size:12px}.quote{font-size:27px}.perspective{padding:65px 0}.perspective-head{gap:30px}.perspective-head>p{font-size:12px;max-width:270px}.perspective-grid{grid-template-columns:1fr 1fr}.court-board{padding:25px;min-height:320px}.view-copy{padding:23px}.view-copy h3{font-size:23px}.view-copy p{font-size:12px}.view-switch button{padding:6px 11px;font-size:10px}.view-copy .view-note{font-size:8px}.intersection{padding-bottom:65px}.intersection-inner{gap:45px}.intersection h2{font-size:34px}.intersection p{font-size:12px}.project-line{grid-template-columns:100px 1fr;gap:15px;font-size:11px}.contact{padding:50px 0}.contact h2{font-size:41px}.contact p{font-size:13px}.home{font-size:10px}.brand b{font-size:13px}.brand small{font-size:9px}}
+@media(max-width:580px){.wrap{width:calc(100% - 40px)}.brand{gap:10px}.monogram{height:33px;width:33px;font-size:15px}.brand small{font-size:8px}.tools{gap:12px}.home{display:none}.hero-top{align-items:start}.hero-top .mono{font-size:8px}.hero-grid{grid-template-columns:1fr;gap:35px}.hero h1{font-size:clamp(58px,13vw,77px)}.hero-copy>p{font-size:15px;max-width:350px;line-height:1.8}.hero-copy .text-link{font-size:13px}.court-art{aspect-ratio:1.2}.art-label,.art-caption{font-size:8px;left:19px;right:19px}.timeline-strip{margin-top:34px}.milestone{padding:18px 12px}.milestone b{font-size:15px;line-height:1.4}.milestone span{font-size:7px;line-height:1.7;letter-spacing:.025em}.hero{padding-bottom:25px}.story-grid{grid-template-columns:1fr;gap:30px;margin-top:25px}.section-title{font-size:42px}.story-intro{font-size:15px;max-width:350px}.chapter{grid-template-columns:25px 1fr;gap:14px;padding:24px 0}.chapter h3{font-size:23px}.chapter p{font-size:14px}.chapter .chapter-label{font-size:9px}.philosophy-grid{grid-template-columns:1fr;gap:32px;margin-top:27px}.philosophy h2{font-size:44px}.philosophy-intro{font-size:14px}.value{grid-template-columns:26px 1fr;gap:13px}.value h3{font-size:22px}.value p{font-size:14px}.quote{font-size:27px;margin-top:33px;padding-top:28px}.perspective-head{display:block;margin-top:24px}.perspective-head>p{margin-top:18px;font-size:14px;max-width:330px}.perspective-grid{grid-template-columns:1fr}.court-board{min-height:270px;padding:32px}.view-copy{padding:28px}.view-copy h3{font-size:29px}.view-copy p{font-size:14px}.view-switch{margin-bottom:24px}.view-switch button{padding:8px 15px;font-size:12px}.view-copy .view-note{font-size:9px}.intersection-inner{grid-template-columns:1fr;gap:27px;padding-top:34px}.intersection h2{font-size:39px}.intersection p{font-size:14px}.project-line{grid-template-columns:105px 1fr;font-size:12px;gap:15px}.contact-inner{display:block}.contact h2{font-size:40px}.contact p{font-size:14px}.contact-actions{gap:22px;flex-wrap:wrap}.footer-motto{display:none}.footer-inner{font-size:10px;gap:20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-
-<div class="topbar">
-  <a class="back" href="../">← gokhankaya.net</a>
-  <span class="who">Gökhan Kaya</span>
-</div>
-
-<header class="hero">
-  <div class="hero-bg"><span class="glow"></span></div>
-  <div class="ball-scene" aria-hidden="true">
-    <svg viewBox="0 0 200 200" fill="none">
-      <path class="traj" d="M6 188 C 40 150, 60 70, 150 36" stroke="#ff7a33" stroke-width="2.5" stroke-linecap="round"/>
-      <g class="ball">
-        <circle cx="150" cy="34" r="30" fill="#eef1f7"/>
-        <path d="M150 4 C 132 26, 130 52, 150 64" stroke="#0b1124" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <path d="M122 22 C 146 34, 160 44, 178 40" stroke="#0b1124" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <path d="M124 52 C 140 40, 168 34, 176 18" stroke="#0b1124" stroke-width="3" fill="none" stroke-linecap="round"/>
-      </g>
-    </svg>
-  </div>
-  <div class="wrap">
-    <p class="eyebrow">Antrenör · Takım Arkadaşı</p>
-    <h1>Topun Düşmesine<br><span class="flare">İzin Verme</span></h1>
-    <p class="hero-sub">
-      Gün boyu mühendislik, akşamları file başında. Voleybol beni <strong>ben yapan</strong> oyun;
-      sahada öğrendiklerimi artık <strong>antrenör</strong> olarak paylaşıyorum.
-    </p>
-    <div class="scrollcue"><span class="arrow">↓</span> aşağı kaydır</div>
-  </div>
-</header>
-
-<div class="stats">
-  <div class="stat"><div class="k">Ortaokuldan beri</div><div class="v">sahada</div></div>
-  <div class="stat"><div class="k">Lisede</div><div class="v">takım kaptanı</div></div>
-  <div class="stat"><div class="k">Level 1</div><div class="v">voleybol antrenörü</div></div>
-</div>
-
-<section class="band story">
-  <div class="wrap">
-    <p class="eyebrow reveal">// saha</p>
-    <h2 class="section-title reveal">Hikâye</h2>
-    <div class="reveal">
-      <p>
-        Voleybol, hayatımda en güçlü iz bırakan şeylerden biri. Ortaokulda başladı; lisede
-        takım kaptanlığı yaptım ve turnuvalarda oynadım, üniversitede de sahayı bırakmadım.
-        Bugün hâlâ rekreasyonel olarak oynuyor, profesyonel maçları yakından takip ediyorum.
-      </p>
-      <p>
-        Level 1 Antrenörlük belgesini almak, bu tutkuyu yeni bir alana taşımamı sağladı:
-        takım ruhunu, disiplini ve gelişimi başkalarına aktarmak. Benim için antrenörlük
-        bir sonuç değil, birlikte yürünen bir yol.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap">
-    <p class="eyebrow reveal">// inanç</p>
-    <h2 class="section-title reveal">Antrenörlük Felsefem</h2>
-    <p class="lead reveal">
-      Benim için antrenörlük yalnızca performans değil — <strong>inanç, sorumluluk ve
-      ortak bir hayal</strong> inşa etmek.
-    </p>
-    <div class="values">
-      <div class="card reveal">
-        <div class="num">01</div>
-        <h3>Takım Ruhu</h3>
-        <p>Sahaya çıkan tek tek oyuncular değil, ortak bir hedefe inanan bir gruptur. Önce "biz" oluruz.</p>
-      </div>
-      <div class="card reveal">
-        <div class="num">02</div>
-        <h3>Disiplin</h3>
-        <p>İstikrar, her gün tekrarlanan küçük doğru alışkanlıklardan gelir. Antrenman sahada, karakter dışarıda biter.</p>
-      </div>
-      <div class="card reveal">
-        <div class="num">03</div>
-        <h3>Gelişim</h3>
-        <p>Herkesin bir sonraki adımı vardır. İşim, o adımı görmek ve birlikte oraya yürümek.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="quote">
-  <div class="wrap reveal">
-    <blockquote>İyi takım, en sert smacı değil; topu yerden kurtaran <span class="flare">o son hamleyi</span> paylaşır.</blockquote>
-    <cite>— saha notları</cite>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="wrap reveal">
-    <p class="eyebrow" style="justify-content:center;">// birlikte</p>
-    <h2>Aynı hayali mi paylaşıyoruz?</h2>
-    <p>Takımın, kulübün ya da sadece güzel bir sohbet için — kapım açık.</p>
-    <div class="actions">
-      <a class="btn btn-primary" href="mailto:me@gokhankaya.net">Bana yaz</a>
-      <a class="btn btn-ghost" href="../">← Ana sayfaya dön</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <span>© <span id="y"></span> Gökhan Kaya</span>
-    <span>🏐 Saha dışında</span>
-  </div>
-</footer>
-
+<a class="skip" href="#main" data-en="Skip to content">İçeriğe geç</a>
+<header><div class="wrap header-inner"><a class="brand" href="../" aria-label="Gökhan Kaya — Ana sayfa"><span class="monogram">GK</span><div><b>Gökhan Kaya</b><small data-en="ENGINEERING × VOLLEYBALL">YAZILIM × VOLEYBOL</small></div></a><nav class="nav" aria-label="Sayfa bölümleri"><a href="#hikaye" data-en="My story">Hikâyem</a><a href="#felsefe" data-en="Coaching">Antrenörlük</a><a href="#bakis" data-en="Perspective">Bakışım</a></nav><div class="tools"><a class="home" href="../" data-en="← Home">← Ana sayfa</a><button class="lang" id="language" type="button" aria-label="Switch to English">EN</button><button class="theme" id="theme" type="button" aria-label="Koyu temaya geç">◐</button></div></div></header>
+<main id="main">
+<section class="hero wrap"><div class="hero-top"><p class="mono muted" data-en="A STORY FROM THE COURT">SAHADAN BİR HİKÂYE</p><span class="mono muted" data-en="PLAYER / TEAMMATE / COACH">OYUNCU / TAKIM ARKADAŞI / ANTRENÖR</span></div><div class="hero-grid"><div class="hero-copy"><h1><span data-en="More than">Bir oyundan</span><span class="accent" data-en="a game.">fazlası.</span></h1><p data-en="It started in middle school. Over time, volleyball became my way of being part of a team, sharing responsibility and helping others grow.">Ortaokulda başlayan bir oyun. Zamanla takım olmanın, sorumluluk paylaşmanın ve birlikte gelişmenin hayatımdaki karşılığına dönüştü.</p><a class="text-link" href="#hikaye"><span data-en="How it started">Hikâyenin başlangıcı</span><span class="arrow" aria-hidden="true">↘</span></a></div><figure class="court-art" aria-label="Voleybol topu ve saha çizgilerinden oluşan illüstrasyon"><div class="art-label mono"><span>GK / COURTSIDE</span><span>01 — ∞</span></div><svg viewBox="0 0 480 450" fill="none" aria-hidden="true"><path d="M-20 339 159 200H351L526 339ZM255 200V339M60 277H444" stroke="#e2e7dd" stroke-opacity=".25" stroke-width="1.5"/><path d="M76 365Q223 95 381 116" stroke="#f59672" stroke-width="1.5" stroke-dasharray="5 10"/><path d="M75 376V336M55 356H95" stroke="#f59672" stroke-width="1.5"/><g transform="rotate(-15 309 153)"><circle cx="309" cy="153" r="91" fill="#f47c53"/><circle cx="309" cy="153" r="80" stroke="#192838" stroke-width="1.8"/><path d="M309 73C269 101 266 179 309 233M233 122C274 137 329 196 385 174M253 211C273 167 347 157 373 105" stroke="#192838" stroke-width="2"/></g><circle cx="116" cy="244" r="3" fill="#eff0e6"/><circle cx="158" cy="302" r="3" fill="#eff0e6"/><circle cx="222" cy="316" r="3" fill="#eff0e6"/><path d="M117 244 158 302 222 316" stroke="#eff0e6" stroke-opacity=".3" stroke-width="1"/></svg><figcaption class="art-caption mono"><span data-en="THE GAME CHANGES. THE TEAM REMAINS.">OYUN DEĞİŞİR. TAKIM KALIR.</span><span>VOLLEYBALL</span></figcaption></figure></div><div class="timeline-strip"><div class="milestone"><b data-en="Since middle school">Ortaokuldan beri</b><span data-en="On the court">Sahanın içinde</span></div><div class="milestone"><b data-en="High-school captain">Lisede takım kaptanı</b><span data-en="Shared responsibility">Ortak sorumluluk</span></div><div class="milestone"><b data-en="Level 1 coach">1. Kademe antrenör</b><span data-en="A new perspective">Yeni bir bakış</span></div></div></section>
+<section class="story wrap" id="hikaye"><p class="label mono" data-en="01 / WHERE IT BEGAN">01 / NEREDEN BAŞLADI?</p><div class="story-grid"><div><h2 class="section-title" data-en="I kept coming back to the court.">Dönüp dolaşıp<br>yine sahaya.</h2><p class="story-intro" data-en="Volleyball has stayed with me through different chapters of life. The way I see it keeps evolving.">Hayatın farklı dönemlerinde voleybol hep benimleydi. Zamanla oyuna baktığım yer değişti.</p></div><div class="chapters"><article class="chapter"><span class="num">01</span><div><span class="chapter-label" data-en="THE BEGINNING">BAŞLANGIÇ</span><h3 data-en="First, simply playing.">Önce oyunun kendisi.</h3><p data-en="My volleyball story began in middle school. In high school, I captained the team and played in tournaments. Being on court also meant taking responsibility for the team.">Voleybol hikâyem ortaokulda başladı. Lisede takım kaptanlığı yaptım, turnuvalarda oynadım. Sahada olmak, takım için sorumluluk almayı da beraberinde getirdi.</p></div></article><article class="chapter"><span class="num">02</span><div><span class="chapter-label" data-en="STAYING CONNECTED">BAĞI KORUMAK</span><h3 data-en="There was always another game.">Oyun devam etti.</h3><p data-en="I kept playing through university. Today, I still play recreationally and follow professional volleyball closely. I enjoy the rhythm of a team as much as any individual play.">Üniversitede de sahayı bırakmadım. Bugün hâlâ rekreasyonel olarak oynuyor, profesyonel voleybolu yakından takip ediyorum. Tek bir pozisyon kadar takımın birlikte kurduğu ritim de ilgimi çekiyor.</p></div></article><article class="chapter"><span class="num">03</span><div><span class="chapter-label" data-en="A NEW PERSPECTIVE">YENİ BİR BAKIŞ</span><h3 data-en="From playing to helping others grow.">Öğrendiklerimi paylaşmak.</h3><p data-en="Earning my Level 1 coaching certificate opened a new chapter. What I learned as a player now informs how I think about teamwork, discipline and supporting development.">1. Kademe Antrenörlük belgesini almak bu tutkuda yeni bir sayfa açtı. Oyuncu olarak öğrendiklerimi; takım ruhunu, disiplini ve gelişimi destekleyen bir bakışa taşımak istiyorum.</p></div></article></div></div></section>
+<section class="philosophy" id="felsefe"><div class="wrap"><p class="label mono" data-en="02 / WHAT I BRING TO COACHING">02 / ANTRENÖRLÜĞE BAKIŞIM</p><div class="philosophy-grid"><div><h2><span style="color:inherit" data-en="The next ball.">Bir sonraki topa.</span><br><span data-en="The next step.">Bir sonraki adıma.</span></h2><p class="philosophy-intro" data-en="Coaching, to me, is a shared path. Understanding where someone is today helps you see their next step.">Benim için antrenörlük birlikte yürünen bir yol. Birinin bugün nerede olduğunu anlamak, bir sonraki adımını görebilmeyi sağlıyor.</p></div><div><article class="value"><span class="num">01</span><div><h3 data-en="Teamwork">Takım olmak</h3><p data-en="Everyone has a part in the same play. Communication, trust and shared responsibility give those parts meaning.">Aynı oyunda herkesin bir rolü var. İletişim, güven ve ortak sorumluluk bu rolleri anlamlı bir bütüne dönüştürüyor.</p></div></article><article class="value"><span class="num">02</span><div><h3 data-en="Consistency">İstikrar</h3><p data-en="Progress builds through small, repeatable habits. The way we practise shapes the way we play.">Gelişim, tekrar edilebilen küçük doğru alışkanlıklarla birikiyor. Antrenmanda kurduğumuz düzen oyuna yansıyor.</p></div></article><article class="value"><span class="num">03</span><div><h3 data-en="Room to grow">Gelişime alan açmak</h3><p data-en="A clear purpose and useful feedback help a player take ownership of the next step.">Net bir amaç ve işe yarayan geri bildirim, oyuncunun bir sonraki adımı sahiplenmesine yardımcı oluyor.</p></div></article></div></div><p class="quote" data-en="Keep the ball in play. <span>Keep learning together.</span>">Topu oyunda tut.<br><span>Birlikte öğrenmeye devam et.</span></p></div></section>
+<section class="perspective wrap" id="bakis"><p class="label mono" data-en="03 / THE SAME COURT, A DIFFERENT VIEW">03 / AYNI SAHA, FARKLI BAKIŞ</p><div class="perspective-head"><h2 class="section-title" data-en="What am I looking at?">Neye bakıyorum?</h2><p data-en="Playing and coaching bring different questions to the same moment. Switch the view below.">Oyuncu ve antrenör aynı ana farklı sorularla bakıyor. Bakışı değiştir, odağın nasıl değiştiğini gör.</p></div><div class="perspective-grid"><figure class="court-board" id="court-board" aria-label="Oyuncu ve antrenör bakışını anlatan şematik voleybol sahası"><svg viewBox="0 0 480 270" fill="none" aria-hidden="true"><rect x="35" y="35" width="410" height="200" stroke="#728b76" stroke-width="1.5"/><path d="M240 35V235" stroke="#486b51" stroke-width="1.5" stroke-dasharray="5 4"/><path d="M172 35V235M308 35V235" stroke="#9bad97" stroke-width="1"/><g fill="#315d48"><circle cx="88" cy="86" r="7"/><circle cx="112" cy="148" r="7"/><circle cx="86" cy="198" r="7"/><circle cx="199" cy="86" r="7"/><circle cx="199" cy="145" r="7"/><circle cx="199" cy="198" r="7"/></g><g fill="#ba6548"><circle cx="280" cy="86" r="7"/><circle cx="280" cy="145" r="7"/><circle cx="280" cy="198" r="7"/><circle cx="378" cy="86" r="7"/><circle cx="359" cy="148" r="7"/><circle cx="378" cy="198" r="7"/></g><g class="pass-line"><path d="M379 86Q240 4 112 148L199 86" stroke="#ba6548" stroke-width="2" stroke-dasharray="5 5"/><circle cx="112" cy="148" r="17" stroke="#315d48" stroke-width="1.5"/></g><g class="coach-mark" stroke="#315d48" stroke-width="1.5"><rect x="62" y="61" width="72" height="157" rx="6" stroke-dasharray="5 4"/><path d="M145 132H180M164 119 180 132 164 145"/><circle cx="199" cy="145" r="19"/><path d="M88 247V258H199V247"/></g></svg><figcaption class="board-label mono" data-en="ILLUSTRATIVE COURT · NOT MATCH DATA">TEMSİLİ SAHA · MAÇ VERİSİ DEĞİLDİR</figcaption></figure><div class="view-copy"><div class="view-switch" role="group" aria-label="Bakış seçimi"><button type="button" id="player-view" aria-pressed="true" data-en="As a player">Oyuncu olarak</button><button type="button" id="coach-view" aria-pressed="false" data-en="As a coach">Antrenör olarak</button></div><h3 id="view-title">Bir sonraki temasım ne?</h3><p id="view-description">Topa hazırlanmak, takım arkadaşımla anlaşmak ve pozisyonun içinde doğru kararı vermek. Odağım, oyunun bir sonraki anında.</p><span class="view-note" id="view-note">HAZIRLIK / İLETİŞİM / KARAR</span></div></div></section>
+<section class="intersection wrap"><div class="intersection-inner"><div><p class="label mono" data-en="04 / FROM THE COURT TO CODE">04 / SAHADAN KODA</p><h2 data-en="The questions I bring back to my desk.">Masama taşıdığım<br>saha soruları.</h2></div><div><p data-en="My engineering work and volleyball keep meeting at practical questions: What is the real need? What deserves attention? Which tool would make that moment easier? These questions shape my sports technology ideas.">Mühendislik ve voleybol, günlük ihtiyaçlarda buluşuyor: Asıl problem ne? Dikkat nereye verilmeli? Hangi araç o anı kolaylaştırır? Spor teknolojileri üzerine fikirlerimi bu sorular şekillendiriyor.</p><div class="project-lines"><div class="project-line"><b>SportPlatform</b><span data-en="Sports software, product research and AI-assisted development.">Spor yazılımı, ürün araştırması ve AI destekli geliştirme.</span></div><div class="project-line"><b>VolleyReplay</b><span data-en="A replay concept designed to keep the coach focused on training.">Antrenörü antrenmanın içinde tutmayı amaçlayan replay fikri.</span></div></div><a class="text-link" href="../#projeler"><span data-en="Explore my projects">Projeleri keşfet</span><span class="arrow" aria-hidden="true">↗</span></a></div></div></section>
+<section class="contact"><div class="wrap contact-inner"><div><p class="mono" data-en="THE NEXT CONVERSATION">BİR SONRAKİ SOHBET</p><h2 data-en="Let’s talk about the game.">Oyunu konuşalım.</h2><p data-en="Volleyball, coaching or a useful idea from the court. My door is open.">Voleybol, antrenörlük ya da sahadan gelen iyi bir fikir. Bir sohbetle başlayabiliriz.</p><div class="contact-actions"><a class="button" href="mailto:me@gokhankaya.net"><span data-en="Get in touch">Bana yaz</span><span class="arrow" aria-hidden="true">↗</span></a><a class="text-link" href="../" data-en="← Back to homepage">← Ana sayfaya dön</a></div></div></div></section>
+</main><footer><div class="wrap footer-inner"><span>© <span id="year">2026</span> Gökhan Kaya</span><span class="footer-motto" data-en="ENGINEER. TEAMMATE. ALWAYS CURIOUS.">MÜHENDİS. TAKIM ARKADAŞI. HEP MERAKLI.</span><a href="../" data-en="Code × Court ↗">Kod × Saha ↗</a></div></footer>
 <script>
-  document.getElementById('y').textContent = new Date().getFullYear();
-  const io = new IntersectionObserver((es)=>{
-    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-  },{threshold:.14});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+(()=>{'use strict';let lang='tr',view='player';const root=document.documentElement;const items=[...document.querySelectorAll('[data-en]')];items.forEach(el=>el.dataset.tr=el.innerHTML);const copy={tr:{player:['Bir sonraki temasım ne?','Topa hazırlanmak, takım arkadaşımla anlaşmak ve pozisyonun içinde doğru kararı vermek. Odağım, oyunun bir sonraki anında.','HAZIRLIK / İLETİŞİM / KARAR'],coach:['Takımın bir sonraki adımı ne?','Tek bir temasın yanında, oyuncuların birbirine nasıl alan açtığına ve geri bildirimin nasıl anlaşılacağına bakıyorum. Odağım, birlikte gelişmekte.','GÖZLEM / GERİ BİLDİRİM / GELİŞİM']},en:{player:['What is my next contact?','Get ready for the ball, communicate with a teammate and make a decision in the play. My focus is on the next moment.','READINESS / COMMUNICATION / DECISION'],coach:['What is the team’s next step?','Alongside the contact, I look at how players create space for each other and how feedback will land. My focus is on growing together.','OBSERVATION / FEEDBACK / DEVELOPMENT']}};function storage(key,value){try{if(value===undefined)return localStorage.getItem(key);localStorage.setItem(key,value)}catch(e){return null}}function renderView(){const c=copy[lang][view];document.getElementById('view-title').textContent=c[0];document.getElementById('view-description').textContent=c[1];document.getElementById('view-note').textContent=c[2];document.getElementById('court-board').classList.toggle('coach-view',view==='coach');['player','coach'].forEach(v=>document.getElementById(v+'-view').setAttribute('aria-pressed',String(view===v)))}function controls(){const dark=root.dataset.theme==='dark';document.getElementById('theme').setAttribute('aria-label',lang==='tr'?(dark?'Açık temaya geç':'Koyu temaya geç'):(dark?'Switch to light theme':'Switch to dark theme'));document.getElementById('theme').setAttribute('aria-pressed',String(dark));document.getElementById('language').textContent=lang==='tr'?'EN':'TR';document.getElementById('language').setAttribute('aria-label',lang==='tr'?'Switch to English':'Türkçeye geç');document.querySelector('.brand').setAttribute('aria-label',lang==='tr'?'Gökhan Kaya — Ana sayfa':'Gökhan Kaya — Home');document.querySelector('.view-switch').setAttribute('aria-label',lang==='tr'?'Bakış seçimi':'Choose a perspective');document.querySelector('nav').setAttribute('aria-label',lang==='tr'?'Sayfa bölümleri':'Page sections');document.title=lang==='tr'?'Voleybol Hikâyem — Gökhan Kaya':'My Volleyball Story — Gökhan Kaya';document.querySelector('meta[name="theme-color"]').content=dark?'#111b27':'#f6f5f0'}function setLang(value){lang=value==='en'?'en':'tr';root.lang=lang;items.forEach(el=>el.innerHTML=lang==='en'?el.dataset.en:el.dataset.tr);controls();renderView();storage('gk-lang',lang)}document.getElementById('language').addEventListener('click',()=>setLang(lang==='tr'?'en':'tr'));document.getElementById('theme').addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';storage('gk-theme',root.dataset.theme);controls()});['player','coach'].forEach(v=>document.getElementById(v+'-view').addEventListener('click',()=>{view=v;renderView()}));document.getElementById('year').textContent=new Date().getFullYear();setLang(storage('gk-lang')||'tr');})();
 </script>
-
-</body>
-</html>
+</body></html>
