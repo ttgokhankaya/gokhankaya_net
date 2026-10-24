@@ -83,3 +83,17 @@ Recorded 2026-10-25 (Europe/Istanbul).
 - Sites audience remains owner-private.
 - Pre-redesign backup remains `d6f3047032227200ec156d34c1ce65c7c6434abc` on the preserved backup branch.
 - Claude Code review is pending. The communication branch and issue #13 contain the handoff and the whole-site tone requirement; no direct Claude Code runtime was available.
+
+## Illustration release — PR #15
+
+Recorded 2026-10-25 (Europe/Istanbul).
+
+- Main: `f390c1604b10dd5ce69a26c1b884657eba9ed6f6`.
+- GitHub Pages workflow: https://github.com/ttgokhankaya/gokhankaya_net/actions/runs/40142255354 — completed / success.
+- Sites deployment: `appgdep_6add3d16f548819188bc91143f318b1b` — succeeded.
+- Sites saved version: `appgprj_6add188fe17c8191808021c5edd5947a~appgver_733ddd57069081919db358cfe2363c62`.
+- Live `/voleybol/` displayed the shared SVG ball in the new court/net illustration.
+- Live homepage `.portrait-stamp img` loaded `./img/volleyball.svg` successfully.
+- Desktop and 390px mobile views checked. Player/coach highlights retain the correct opacity states.
+- Asset license: `img/volleyball.LICENSE.txt`.
+- Original backup branch remains unchanged.
